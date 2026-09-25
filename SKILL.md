@@ -1,6 +1,6 @@
 ---
 name: moonbit-contest-projects
-description: Plan, build, review, and package independent MoonBit projects for a hackathon or ecosystem contest. Use when the user wants contest-ready local source folders, proposals, reproducible demos, tests, or acceptance checks; respect an explicit local-only scope.
+description: Plan, build, review, package, and explicitly authorized publish independent MoonBit contest projects. Use for local source folders, proposals, reproducible demos, acceptance checks, GitHub upload, or Mooncakes publication.
 ---
 
 # MoonBit 参赛项目开发与交付
@@ -30,7 +30,7 @@ description: Plan, build, review, and package independent MoonBit projects for a
 
 ## 4. 写申报书
 
-- 依当期样本组织标题和字段，参赛人、联系方式、仓库链接等由用户填写的信息留空。优先控制在当期规定的篇幅内。
+- 依当期样本组织标题和字段，参赛人、联系方式等由用户填写的信息留空；尚未创建的仓库链接留空，已创建的链接用实际地址。优先控制在当期规定的篇幅内。
 - 写项目简介、方向与生态位置、至少当期规则要求数量的完整使用场景、核心功能、实现路径、预期交付、原创/移植/参考说明及许可证。每个场景说明谁拿什么输入、得到什么结果，避免同义改写凑数量。
 - 承诺仅写已实现或明确标成计划的能力；与 API、测试、README 对照。说明不支持的协议部分和安全边界。文字具体自然，避免空泛的“赋能”“打造”及重复模板句。
 
@@ -45,3 +45,12 @@ description: Plan, build, review, and package independent MoonBit projects for a
 - 对照源目录与交付目录的相对文件清单，确保 `.mbt`、`moon.mod`、`moon.pkg`、示例、测试、README、申报书、许可证和 CI 配置无遗漏；区分生成接口与可删除的 `_build` 缓存。改名后更新所有模块导入与测试引用，再重新构建和测试。
 - 若用户要求根目录只放项目，最终核对根级项目数量、名称、隐藏目录及缓存。工具链、安装包、旧版本和用户原有 Git 历史的去向要可追踪；不要为目录整洁破坏仍需使用的工具链或删除未获准丢弃的数据。
 - 最终交代每个项目的绝对路径、包含的交付内容、已通过的本地验证及未完成的外部验收条件。用户要求不上传时，明确确认没有初始化/提交/上传/发布。
+
+## 7. 上传与发布（仅在明确要求时）
+
+- 用户要求上传或发布哪个项目，就只处理那个项目；区分“上传 GitHub”“公开仓库”“创建版本 Release”“同步 Gitlink”“发布 Mooncakes”和“报名提交”。只执行已授权的目标。若用户已明确指定公开或私有可见性，直接按该要求执行；未指定时，结合既有偏好与当前仓库状态选择保守可见性，并在结果中说明。
+- 上传前核对 `moon.mod` 的模块名、仓库归属、许可证、README、申报书、来源声明和工作树内容。检查敏感信息、真实个人数据、构建缓存、压缩包和无权分发的第三方文件；只提交当前项目需要的文件，不把同目录其他项目一起推送。发现会公开敏感数据的实质问题时先修正，再继续发布。
+- 检查目标仓库是否已存在及其默认分支。新仓库可在项目目录初始化 Git、创建有意义的首个提交并推送；已有仓库应保留历史和未提交改动，先核对远端与本地分支，避免覆盖或强推。不要制造空提交、拆分提交或伪造开发历史来满足赛事数量要求。
+- 推送后从远端读取仓库可见性、默认分支、最新提交和文件清单；等待相关 CI 完成并报告实际结果。GitHub Release 或 Gitlink 同步只在用户或当期规则明确要求时执行，核对发布的 tag、包或镜像是否与目标提交一致。
+- 发布 Mooncakes 前读取当前工具链的发布命令和平台要求，确认账号、包命名空间、版本、许可证及目标模块匹配，运行本地检查和测试。实际发布后核对包页面与版本；失败时给出具体阻断条件，不把编译成功写成发布成功。
+- 完成后提供真实的仓库、Release、Gitlink 和 Mooncakes 链接（仅列已完成的项），说明提交 SHA、仓库可见性、CI 状态与仍需参赛人填写或提交的材料。用户明确授权的上传不需要再次索取同一步骤的许可。
